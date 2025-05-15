@@ -90,3 +90,4 @@ D:\my_dotnet_mvc\obj\Debug\net9.0\refint\MyWebApp.dll
 D:\my_dotnet_mvc\obj\Debug\net9.0\MyWebApp.pdb
 D:\my_dotnet_mvc\obj\Debug\net9.0\MyWebApp.genruntimeconfig.cache
 D:\my_dotnet_mvc\obj\Debug\net9.0\ref\MyWebApp.dll
+D:\my_dotnet_mvc\obj\Debug\net9.0\MyWebApp.sourcelink.json
