@@ -1,23 +1,19 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyWebApp.Models;
-namespace MyWebApp.Controllers;
-
-public class BooksController : Controller
+namespace MyWebApp.Controllers
 {
-    public IActionResult Search(Book? book)
+    [ApiController]
+    [Route("books")]
+    public class BooksController : Controller
     {
-        return View(book);
-    }
-
-    public IActionResult Get()
-    {
-        var book = new Book()
+        [HttpPost(Name = "SearchBooks")]
+        [Authorize]
+        public IActionResult Search(Book? book)
         {
-            Id = 1,
-            Title = "Sample Book",
-            Price = 19.99m
-        };
-        return View(book);
-    }
+            return View(book);
+        }
 
+    }
 }
+
