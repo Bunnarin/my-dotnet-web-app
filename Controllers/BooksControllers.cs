@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyWebApp.Data;
@@ -23,12 +24,14 @@ public class BooksController : Controller
     }
 
     [HttpGet("create")]
+    [Authorize]
     public IActionResult Create()
     {
         return View();
     }
     [HttpPost("create")]
-    public async Task<IActionResult> Create([Bind("Title, Price")] Book book)
+    [Authorize]
+    public async Task<IActionResult> Create([FromForm] Book book)
     {
         if (ModelState.IsValid)
         {
@@ -39,6 +42,7 @@ public class BooksController : Controller
         return View(book);
     }
     [HttpGet("delete/{id}")]
+    [Authorize]
     public async Task<IActionResult> Delete(int id)
     {
         var item = await _context.Books.FindAsync(id);

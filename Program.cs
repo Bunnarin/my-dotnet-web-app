@@ -1,7 +1,8 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using MyWebApp.Data;
@@ -47,10 +48,14 @@ builder.Services.AddDbContext<MyWebAppContext>(options =>
 // and this is for the auth db context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Add Identity services
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false) // Configure Identity options here
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddRazorPages();
 
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
-builder.Services.AddIdentityCore<User>()
+builder.Services.AddIdentityCore<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddApiEndpoints();
 
@@ -83,6 +88,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-app.MapIdentityApi<User>();
-
+app.MapIdentityApi<IdentityUser>();
+app.MapRazorPages();
 app.Run();
