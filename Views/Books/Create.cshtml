@@ -1,0 +1,11 @@
+﻿@model MyWebApp.Models.Book
+@{
+}
+
+<form asp-action="Create" method="post">
+	<div class="form-group">
+		<input type="text" class="form-control" asp-for="Title"/>
+		<input type="number" class="form-control" asp-for="Price"/>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</div>
+</form>

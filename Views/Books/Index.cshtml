@@ -1,0 +1,26 @@
+@model List<MyWebApp.Models.Book>
+@{
+}
+
+<form method="get" asp-controller="Books" asp-action="Create">
+    <button type="submit">add book</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Price.ToString("N2")</td>
+                <td><a asp-action="Delete" asp-route-id="@book.Id">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
